@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:testapp/index.dart';
-import 'package:testapp/riverpod_providers/future_provider_example.dart/users_view.dart';
-import 'package:testapp/riverpod_providers/simple_provider.dart';
-import 'package:testapp/riverpod_providers/state_notifier_providerd.dart/counter_screen.dart';
-import 'package:testapp/riverpod_providers/state_provider.dart';
+
+
+// Change theme with RiverPod
+final lightTheme = StateProvider<bool>((ref) => true);
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    final isLightTheme =ref.watch(lightTheme); 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-          useMaterial3: true),
+          colorScheme: ColorScheme.fromSeed(
+              brightness: isLightTheme ? Brightness.light : Brightness.dark,
+            seedColor: Colors.blue),
+          useMaterial3: true,
+        
+          ),
       
       home: const IndexView(),
     );
