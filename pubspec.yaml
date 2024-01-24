@@ -39,6 +39,7 @@ dependencies:
   riverpod_annotation: ^2.3.3
 
   http: ^1.2.0
+  get_storage: ^2.1.1
 
 dev_dependencies:
   flutter_test:
